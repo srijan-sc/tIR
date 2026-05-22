@@ -1,9 +1,9 @@
 cfg = tIRConfig.defaults();
 
 cfg.sample_name   = 'FeRuFe dmso';
-cfg.data_dir      = '/Users/srijan/Downloads/vscode/HBQ_3DVE/tIR/tIR/V3/2026_05/2026_05_21/';
+cfg.data_dir      = fullfile(fileparts(mfilename('fullpath')), 'test_data', '2026_05_21');
 cfg.cal_file      = fullfile(fileparts(mfilename('fullpath')), 'cailbration', 'center_3500nm.txt');
-cfg.probe_file    = '/Users/srijan/Downloads/vscode/HBQ_3DVE/tIR/tIR/V3/2026_05/2026_05_21/probe_4716_150g_SampleReverence.txt';
+cfg.probe_file    = fullfile(fileparts(mfilename('fullpath')), 'test_data', '2026_05_21', 'probe_4716_150g_SampleReverence.txt');
 
 cfg.root_name     = 'FeRuFe_DMSO_trace02_4716_150g_011_Row0';
 cfg.pump_power_nJ = 50;
