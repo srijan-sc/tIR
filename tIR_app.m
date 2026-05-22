@@ -217,7 +217,15 @@ PAD = [0.07 0.09 0.87 0.85];
 axes_.proj    = uiaxes(tabs.proj,    'Units', 'normalized', 'Position', PAD);
 axes_.raw     = uiaxes(tabs.raw,     'Units', 'normalized', 'Position', PAD);
 axes_.slices  = uiaxes(tabs.slices,  'Units', 'normalized', 'Position', PAD);
-axes_.tslices = uiaxes(tabs.tslices, 'Units', 'normalized', 'Position', PAD);
+tab5GL = uigridlayout(tabs.tslices, [2 1], ...
+    'RowHeight', {'1x', 36}, 'Padding', [6 6 6 6], 'RowSpacing', 4, ...
+    'BackgroundColor', TAB_BG);
+axes_.tslices = uiaxes(tab5GL); axes_.tslices.Layout.Row = 1;
+ui.cftoolBtn = uibutton(tab5GL, 'Text', '📈  Open in Curve Fitting Tool', ...
+    'Layout', struct('Row', 2, 'Column', 1), ...
+    'BackgroundColor', [0.14 0.22 0.36], 'FontColor', [0.24 0.68 0.99], ...
+    'FontSize', 12, 'FontWeight', 'bold', ...
+    'ButtonPushedFcn', @(~,~) openCftool(f));
 
 % Tab ③ Normalised: contour + wavenumber slider + slice
 tab3GL = uigridlayout(tabs.norm, [3 1], ...
@@ -787,6 +795,19 @@ function mkHeader(gl, row, txt)
         'BackgroundColor', [0.13 0.15 0.20], ...
         'VerticalAlignment', 'bottom');
     lbl.Layout.Row = row; lbl.Layout.Column = [1 2];
+end
+
+function openCftool(f)
+    ax = f.UserData.axes.tslices;
+    lines = findobj(ax, 'Type', 'Line');
+    if isempty(lines)
+        uialert(f, 'Run the analysis first to generate time slice data.', 'No data');
+        return;
+    end
+    % Use the first (most recent) line
+    t = lines(1).XData;
+    y = lines(1).YData;
+    cftool(t(:), y(:));
 end
 
 function mkLabel(gl, row, col, txt)
