@@ -13,7 +13,7 @@ A MATLAB GUI for loading, processing, and visualising transient IR pump-probe da
 
 ## Quick Start
 
-1. **Open MATLAB** and `cd` into the `V5/` folder.
+1. **Clone the repo** and open MATLAB in the cloned folder.
 2. Run `tIR_app` in the Command Window — the GUI opens automatically.
 3. The app auto-loads `example_config.m` on startup. Edit that file first (see below), or use **Load Config** to point to your own.
 4. Click **▶ Run** to process and plot.
@@ -57,7 +57,7 @@ Edit `example_config.m` (or copy it) and set these key fields:
 ## Folder Structure
 
 ```
-V5/
+tIR/
 ├── tIR_app.m               # Launch this
 ├── tIRConfig.m             # Config class (do not edit)
 ├── example_config.m        # Edit this for your experiment
